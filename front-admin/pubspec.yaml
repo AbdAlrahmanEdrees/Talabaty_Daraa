@@ -1,0 +1,72 @@
+name: talabat_daraa
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  flutter:
+    sdk: flutter  
+  cupertino_icons: ^1.0.8
+  get: ^4.7.2
+  shared_preferences: ^2.5.3
+  flutter_screenutil: ^5.9.3
+  http: ^1.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+
+
+
+flutter:
+  assets:
+      - assets/images/
+      - assets/icons/
+      - assets/localization/
+      - assets/fonts/
+  
+  fonts:
+    - family: Cairo 
+      fonts:
+        - asset: Assets/fonts/Cairo-Black-900.ttf
+          weight: 900
+        - asset: Assets/fonts/Cairo-Bold-700.ttf
+          weight: 700
+        - asset: Assets/fonts/Cairo-Regular-400.ttf
+          weight: 400
+        - asset: Assets/fonts/Cairo-Light-300.ttf
+          weight: 300
+        
+
+
+    - family: GE_SS_Unique 
+      fonts:
+        - asset: Assets/fonts/GE-SS-Unique-Bold.otf
+          weight: 700
+        - asset: Assets/fonts/GE-SS-Unique-Light.otf
+          weight: 300
+
+
+    - family: Noto_Sans_Arabic 
+      fonts:
+        - asset: Assets/fonts/NotoSansArabic.ttf
+          weight: 400
+
+
+    - family: Sans_Serif_Poppins 
+      fonts:
+        - asset: Assets/fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: Assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: Assets/fonts/Poppins-Light.ttf
+          weight: 300
+
+
+  uses-material-design: true
+
