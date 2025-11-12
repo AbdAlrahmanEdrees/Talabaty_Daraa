@@ -16,12 +16,15 @@ import { EmailModule } from './email/email.module';
     }),
 
     // Database connection
-    TypeOrmModule.forRoot({
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
         type: 'mysql',
         host: 'talabatdaraa1-talabatdaraa1.l.aivencloud.com',
         port: 14495,
         username: 'avnadmin',
-        password: process.env.DB_PASSWORD,
+        password: configService.get<string>('DB_PASSWORD'),
         database: 'defaultdb',
         ssl: {
           ca: fs.readFileSync(join(__dirname, '..', 'certs', 'ca.pem')),
@@ -29,7 +32,7 @@ import { EmailModule } from './email/email.module';
         synchronize: true,
         autoLoadEntities: true,
         dropSchema: true, // Set to true only for testing; otherwise you lose data on restart
-      
+      }),
     }),
 
     AuthModule,
