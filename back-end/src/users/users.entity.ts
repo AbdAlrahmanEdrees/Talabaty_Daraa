@@ -13,32 +13,35 @@ export enum UserApprove {
 }
 
 @Entity('users')
-export class Users {
-  @PrimaryGeneratedColumn({ name: 'users_id' })
-  users_id: number;
+export class User {
+  @PrimaryGeneratedColumn({ name: 'id' })
+  id: number;
 
-  @Column({ name: 'users_name', length: 100 })
-  users_name: string;
+  @Column({ name: 'user_name', length: 100 })
+  user_name: string;
 
-  @Column({ name: 'users_email', length: 100, unique: true })
-  users_email: string;
+  @Column({ name: 'email', length: 100, unique: true })
+  email: string;
 
-  @Column({ name: 'users_password', length: 255 })
-  users_password: string;
+  @Column({ name: 'password', length: 255 })
+  password: string;
 
-  @Column({ name: 'users_phone', length: 100 })
-  users_phone: string;
+  @Column({ name: 'phone', length: 100 })
+  phone: string;
 
-  @Column({ name: 'users_verfiycode', type: 'int' })
-  users_verfiycode: number;
+  @Column({ name: 'verification_code', type: 'int' })
+  verification_code: number;
 
-  @Column({ name: 'users_approve', type: 'tinyint', default: UserApprove.NOT_VERIFIED })
-  users_approve: UserApprove;
+  @Column({name:'verification_code_expires_at'})
+  verification_code_expires_at:Date;
 
-  @Column({ name: 'user_type', type: 'tinyint', default: UserType.CUSTOMER })
+  @Column({ name: 'approve', type: 'tinyint', default: UserApprove.NOT_VERIFIED })
+  approve: UserApprove;
+
+  @Column({ name: 'type', type: 'tinyint', default: UserType.CUSTOMER })
   //0:customer, 1:admin, 2:superadmin
-  user_type: UserType;
+  type: UserType;
 
-  @Column({ name: 'users_create', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  users_create: Date;
+  @Column({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  created_at: Date;
 }

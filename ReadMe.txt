@@ -28,3 +28,7 @@ npm install @nestjs/typeorm typeorm reflect-metadata
 npm install mysql2
 
 npm install class-validator class-transformer
+
+npm install nodemailer
+
+npm install @nestjs/config

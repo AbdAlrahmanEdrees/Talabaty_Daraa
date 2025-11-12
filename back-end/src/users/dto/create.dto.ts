@@ -6,24 +6,24 @@ export class UserCreateDto {
     @IsString()
     @Length(2, 100)
     @ApiProperty()
-    users_name: string;
+    user_name: string;
 
     @IsEmail()
     @ApiProperty({example:'example@gmail.com'})
-    users_email: string;
+    email: string;
 
     @IsString()
     @Length(6, 255, { message: 'Password is too short. Minimum length is 6 characters' })
     @ApiProperty()
-    users_password: string;
+    password: string;
 
     @IsString()
     @Length(9, 13,{message:'Phone number must be between 9 and 13 characters'})
     @ApiProperty()
-    users_phone: string;
+    phone: string;
 
     @IsOptional()
     @IsInt()
     @ApiProperty({ required: false, enum: UserType })
-    user_type?: UserType;
+    type?: UserType;
 }
