@@ -1,43 +1,34 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import * as fs from 'fs';
-import { join } from 'path';
+import { Module } from "@nestjs/common";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { UsersModule } from "./users/users.module";
+import { EmailModule } from "./email/email.module";
+import { AuthModule } from "./auth/auth.module";
 
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
-import { EmailModule } from './email/email.module';
+
 
 @Module({
-  imports: [
-    // Load environment variables from .env
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-
-    // Database connection
+  imports:[
+    ConfigModule.forRoot({isGlobal:true}),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
-        host: 'talabatdaraa1-talabatdaraa1.l.aivencloud.com',
-        port: 14495,
-        username: 'avnadmin',
-        password: configService.get<string>('DB_PASSWORD'),
-        database: 'defaultdb',
-        ssl: {
-          ca: fs.readFileSync(join(__dirname, '..', 'certs', 'ca.pem')),
-        },
-        synchronize: true,
-        autoLoadEntities: true,
-        dropSchema: true, // Set to true only for testing; otherwise you lose data on restart
-      }),
-    }),
+      imports:[ConfigModule],
+      inject:[ConfigService],
+      useFactory:(configService:ConfigService)=>({
+        type:'mysql',
+        host:configService.get<string>('DB_HOST'),
+        port:configService.get<number>('DB_PORT'),
+        username:configService.get<string>('DB_USERNAME'),
+        password:configService.get<string>('DB_PASSWORD'),
+        database:configService.get<string>('DB_DATABASE'),
+        synchronize:true,
+        autoLoadEntities:true,
+        dropSchema:true
 
+      })
+    }),
     AuthModule,
     UsersModule,
     EmailModule,
-  ],
+  ]
 })
-export class AppModule {}
+export class AppModule{}
