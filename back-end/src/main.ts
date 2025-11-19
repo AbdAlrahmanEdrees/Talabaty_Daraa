@@ -3,6 +3,10 @@ import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import * as fs from 'fs';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+//Now process.env is available everywhere (Services, Controllers, Modules)
 
 
 async function bootstrap(){

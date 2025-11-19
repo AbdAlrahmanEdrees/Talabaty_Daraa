@@ -1,21 +1,24 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsString, Matches, MinLength, ValidateIf } from "class-validator";
+import { IsEmail, IsNotEmpty, IsString, Length, Matches, MinLength, ValidateIf } from "class-validator";
 
 export class AuthDto {
-    @ValidateIf((o) => !o.email)
-    @IsString()
-    @ApiProperty()
-    user_name: string;
-
-    @ValidateIf((o) => !o.user_name)
-    @Matches(/^[A-Za-z0-9._%+-]+@gmail\.com$/, {
-        message: 'Email must be a valid @gmail.com address',
-    })
-    @ApiProperty({description:'It should be @gmail.com only'})
-    email: string;
+    @IsNotEmpty()
+    @IsEmail()
+    @ApiProperty({description:'Any valid email address'})
+    email:string;
 
     @IsString()
-    @MinLength(6)
-    @ApiProperty({description:'It should be longer than 6 characters'})
-    password: string;
+    @IsNotEmpty()
+    @Length(3,30,{message:"name should be 3-30 characters"})
+    @ApiProperty({description:'any string 3-30 charachters long'})
+    name:string;
+
+    @IsString()
+    @IsNotEmpty()
+    @Length(6,128,{message:"Password must be 6-128 characters"})
+    @ApiProperty({description:'should be 6-128 characters'})
+    password:string;
+
+
+
 }
